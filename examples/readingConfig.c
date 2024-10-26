@@ -5,7 +5,7 @@
 
 
 int main() {
-    Config* config = loadConfig("simple.ini", 5);
+    Config* config = loadConfig("simple.ini");
 
     if (config == NULL) {
         fprintf(stderr, "Error Opening Config File\n");
