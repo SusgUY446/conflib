@@ -31,7 +31,6 @@ void freeConfig(Config* config);
 char* getValue(Config* config, const char* key);
 int parseLine(char* line, char** key, char** value);
 
-#define CONFIGLIB_IMPL
 
 #ifdef CONFIGLIB_IMPL
 
