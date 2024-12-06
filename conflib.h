@@ -1,5 +1,5 @@
 /*
-Configlib.h 1.0 by SusgUY446 (https://github.com/susguy446)
+Configlib.h 1.1 by SusgUY446 (https://github.com/susguy446)
 
 LICENSE: GPL 3.0 (see LICENSE)
 */
@@ -35,7 +35,6 @@ int parseLine(char* line, char** key, char** value);
 int setValue(Config *config, const char *key, const char *newValue);
 int saveConfig(Config* config, const char* filename);
 
-
 #define CONFIGLIB_IMPL
 
 #ifdef CONFIGLIB_IMPL
@@ -43,7 +42,7 @@ int saveConfig(Config* config, const char* filename);
 Config* loadConfig(const char* filename) {
     FILE* file = fopen(filename, "r");
     if (file == NULL) {
-        fprintf(stderr, "Could not open config file\n");
+        perror("Couldn not open config file\n");
         return NULL;
     }
 
@@ -59,15 +58,15 @@ Config* loadConfig(const char* filename) {
 
     Config* conf = malloc(sizeof(Config));
     if (conf == NULL) {
-        fprintf(stderr, "Memory allocation failed for Config\n");
         fclose(file);
+        perror("Memory allocation failed for Config\n");
         return NULL;
     }
     conf->entries = malloc(sizeof(ConfigEntry) * count);
     if (conf->entries == NULL) {
-        fprintf(stderr, "Memory allocation failed for Config entries\n");
         free(conf);
         fclose(file);
+        perror("Memory allocation failed for Config entries\n");
         return NULL;
     }
     conf->count = 0;
@@ -94,7 +93,7 @@ Config* loadConfig(const char* filename) {
 int saveConfig(Config* config, const char* filename) {
     FILE* file = fopen(filename, "w");
     if (file == NULL) {
-        fprintf(stderr, "Could not open config file\n");
+        perror("Could not open config file\n");
         return -1;
     }
 
