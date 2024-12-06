@@ -35,7 +35,7 @@ int parseLine(char* line, char** key, char** value);
 int setValue(Config *config, const char *key, const char *newValue);
 int saveConfig(Config* config, const char* filename);
 
-#define CONFIGLIB_IMPL
+
 
 #ifdef CONFIGLIB_IMPL
 
