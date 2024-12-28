@@ -1,7 +1,7 @@
 /*
 Configlib.h 1.1 by SusgUY446 (https://github.com/susguy446)
 
-LICENSE: GPL 3.0 (see LICENSE)
+LICENSE: see LICENSE file
 */
 
 // Defines
@@ -16,36 +16,53 @@ LICENSE: GPL 3.0 (see LICENSE)
 
 // Types and structs
 typedef struct ConfigEntry {
-    char *key;
-    char *value;
+    char *key;         // The name of the key 
+    char *value;       // The value of the key
 } ConfigEntry;
 
 typedef struct Config {
-    ConfigEntry *entries;
-    size_t count;
+    ConfigEntry *entries;       // All the entries in the config
+    size_t count;               // Amount of entries in the config
 } Config;
 
 // Function declarations
-Config* loadConfig(const char* filename);
+
+/* Load Config into memory  */
+Config* loadConfig(const char* filename); 
+
+/* Free config from memory  */
 void freeConfig(Config* config);
+
+/* Get the value of a key from a config  */
 char* getValue(Config* config, const char* key);
-int parseLine(char* line, char** key, char** value);
 
 
+// Internal function. Not exposed to the user
+static int _parseLine(char* line, char** key, char** value);
+
+
+/* Set the value of a key from a config  */
 int setValue(Config *config, const char *key, const char *newValue);
+
+/* Save a config to file  */
 int saveConfig(Config* config, const char* filename);
 
 
+#define CONFLIB_IMPL
+#ifdef CONFLIB_IMPL
 
-#ifdef CONFIGLIB_IMPL
+
+// Function definitons
 
 Config* loadConfig(const char* filename) {
+    // Open the file 
     FILE* file = fopen(filename, "r");
     if (file == NULL) {
         perror("Couldn not open config file\n");
         return NULL;
     }
 
+    
     size_t count = 0;
     char line[MAX_LINE_LENGTH];
 
@@ -75,7 +92,7 @@ Config* loadConfig(const char* filename) {
     while (fgets(line, sizeof(line), file)) {
         char *key;
         char *value;
-        if (parseLine(line, &key, &value) == 0) {
+        if (_parseLine(line, &key, &value) == 0) {
             conf->entries[conf->count].key = strdup(key);
             conf->entries[conf->count].value = strdup(value);
             free(key);

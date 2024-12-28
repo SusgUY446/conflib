@@ -18,7 +18,7 @@ Get started using Conflib by looking into the examples folder.
 #include <stdio.h>
 
 int main() {
-    Config* config = loadConfig("simple.ini", 5);
+    Config* config = loadConfig("simple.ini");
 
     if (config == NULL) {
         fprintf(stderr, "Error Opening Config File\n");
