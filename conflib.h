@@ -48,7 +48,7 @@ int setValue(Config *config, const char *key, const char *newValue);
 int saveConfig(Config* config, const char* filename);
 
 
-#define CONFLIB_IMPL
+
 #ifdef CONFLIB_IMPL
 
 
