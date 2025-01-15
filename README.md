@@ -9,7 +9,7 @@ A lightweight single header C library
 
 
 ## Using Conflib
-Get started using Conflib by looking into the examples folder. 
+To start put `#define CONFLIB_IMPL before the include in 1 of your source files. Then you are ready to start using it
 
 ## Example
 
