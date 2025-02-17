@@ -1,3 +1,6 @@
+# Archived repository! https://gitea.com/SusgUY446/conflib
+
+
 # Conflib
 A lightweight single header C library
 
